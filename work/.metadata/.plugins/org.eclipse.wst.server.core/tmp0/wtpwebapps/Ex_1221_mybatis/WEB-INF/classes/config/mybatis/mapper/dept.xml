@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="s">
+	<!--JNDI에 연결된 계정으로 접근하여 CRUD쿼리를 입력하고 
+		결과를 받아오기 위한설정파일  -->
+	
+	<select id="dept_list" resultType="vo.DeptVO">
+		select * from dept
+		<!-- mapper에서는 쿼리문 마지막에 ;을 사용하면 오류 -->
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

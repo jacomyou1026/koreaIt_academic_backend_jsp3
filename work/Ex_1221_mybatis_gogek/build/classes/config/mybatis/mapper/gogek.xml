@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="g">
+	<!--JNDI에 연결된 계정으로 접근하여 CRUD쿼리를 입력하고 
+		결과를 받아오기 위한설정파일  -->
+	
+	<select id="gogek_list" resultType="vo.GogekVO">
+		select * from GOGEK
+		<!-- mapper에서는 쿼리문 마지막에 ;을 사용하면 오류 -->
+	</select>
+	<select id="gogek_deptno" resultType="vo.GogekVO" parameterType="int">
+		select * from GOGEK where godam =#{godam}
+	</select>
+	<select id="gogek_name" resultType="vo.GogekVO" parameterType="String">
+		select * from GOGEK where goname like '%'||#{goname}||'%'
+	</select>
+	<insert id="gogek_insert" parameterType="vo.GogekVO">
+		insert into GOGEK values(#{gobun},#{goname},#{goaddr},#{gojumin},#{godam})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="s">
+	<!--JNDI에 연결된 계정으로 접근하여 CRUD쿼리를 입력하고 
+		결과를 받아오기 위한설정파일  -->
+	
+	<!--  사원 전체목록 조회-->
+	<select id="swon_list" resultType="vo.SwonVO">
+		select * from SAWON
+		<!-- mapper에서는 쿼리문 마지막에 ;을 사용하면 오류 -->
+	</select>
+	
+	<!--부서별 사원목록 조회  -->
+	<!-- parameterType은 기본자료형, String타입을 제외하고 반드시 패키지명을 함께 기술해줘야 한다. -->
+	<select id="sawon_dept" resultType="vo.SwonVO" parameterType="int">
+		select * from SAWON where deptno =#{deptno}
+	</select>
+	
+	<!-- 이름별 사원조회 -->
+	<select id="sawon_name" resultType="vo.SwonVO" parameterType="String">
+		select * from SAWON where saname like '%'||#{saname}||'%' 
+	</select>
+	
+	<!-- 사원추가 -->
+	<!-- insert,update,delete퀄리에는 resultType속성을 기술하지 않는다. -->
+	<insert id="sawon_insert" parameterType="vo.SwonVO">
+		insert into sawon values(#{sabun},#{saname},#{sagen},#{deptno},#{sajob}
+								,#{sahire},#{samgr},#{sapay})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

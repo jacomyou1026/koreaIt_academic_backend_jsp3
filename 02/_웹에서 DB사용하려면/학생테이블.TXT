@@ -1,0 +1,23 @@
+학생 일련번호 관리 객체
+create sequence seq_sungtb_no;
+
+create table SUNGTB(
+	no NUMBER(3) primary key,
+	name VARCHAR2(50),
+	kor NUMBER(3),
+	eng NUMBER(3),
+	mat NUMBER(3)
+);
+
+insert into sungtb values(seq_sungtb_no.nextVal,'일길동',77,88,99);
+insert into sungtb values(seq_sungtb_no.nextVal,'이길동',20,33,430);
+insert into sungtb values(seq_sungtb_no.nextVal,'삼길동',99,100,15);
+commit;
+
+create or replace view sungtb_view as
+select s.*,(kor+eng+mat) total,
+	 round((kor+eng+mat)/3,1) avg,
+	rank()over(order by(kor+eng+mat) desc) rank
+	from (select * from sungtb) s
+	order by no
+commit;

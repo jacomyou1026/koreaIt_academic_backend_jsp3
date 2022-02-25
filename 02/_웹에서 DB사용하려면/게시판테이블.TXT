@@ -1,0 +1,98 @@
+--시퀀스
+create sequence seq_board_idx;
+
+--테이블
+create table BOARD(
+	idx NUMBER(3) primary key, --게시글 번호
+	name VARCHAR2(50) not null, --작성자
+	subject VARCHAR2(200) not null, --게시글 제목
+	content CLOB, --내용
+	pwd VARCHAR2(50), --비밀번호
+	ip VARCHAR2(20), --ip
+	regdate DATE, --작성일
+	readhit NUMBER(4), --조회수	
+	ref NUMBER(2), --기준글 idx
+	step NUMBER(2), --댓글 순서(수직적)
+	depth NUMBER(2) --댓글의 깊이(수평적)
+);
+
+--샘플데이터(새 글)
+insert into BOARD values(
+	seq_board_idx.nextVal, 
+	'작성자명', 
+	'내가 일등', 
+	'냉무', 
+	'1111', 
+	'192.1.1.1', 
+	to_char( sysdate, 'yyyy-mm-dd' ), 
+	0, 
+	seq_board_idx.currVal, 
+	0, 
+	0
+);
+
+--댓글
+insert into BOARD values(
+	seq_board_idx.nextVal, 
+	'작성자명 댓글1', 
+	'내가 이등', 
+	'냉무', 
+	'1111', 
+	'192.1.1.1', 
+	to_char( sysdate, 'yyyy-mm-dd' ), 
+	0, 
+	1, 
+	1, 
+	1
+);
+
+--대댓글
+insert into BOARD values(
+	seq_board_idx.nextVal, 
+	'대댓글', 
+	'나는 대댓글이다', 
+	'냉무', 
+	'1111', 
+	'192.1.1.1', 
+	to_char( sysdate, 'yyyy-mm-dd' ), 
+	0, 
+	1, 
+	2, 
+	2
+);
+
+commit;
+
+게시판 조회
+select * from BOARD order by ref DESC, step ASC;
+
+
+페이징 처리를 위한 쿼리문
+select * from
+(select RANK() OVER(order by ref desc, step asc) no, b.*
+ from (select * from board) b)
+where no between #{start} and #{end} ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//id 중복여부 체크
+	var b_idCheck =false;
+	function send(f){
+		var id = f.id.value;
+		var pwd= f.pwd.value;
+		
+		//유효성체크
+		if(id ==''){
+			alert('id는 필수입니다.');
+			return
+		}
+		if(pwd==''){
+			alert('pwd는 필수입니다.');
+			return
+		}
+		//f.method="post";
+		f.action = "insert.do";
+		f.submit();
+	}
+</script>
+</head>
+<body>
+	<form>
+		<table border="1" align = "center">
+			<caption>회원가입</caption>
+			<tr>
+				<th>아이디</th>
+				<td>
+					<input name ="id" id ="id">
+					<input type ="button" value = "중복체크" onclick="check_id();">
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td>
+					<input type= "password" name ="pwd" >
+				</td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td>
+					<input  name ="name" >
+				</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td>
+					<input  name ="email" >
+				</td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td>
+					<input  name ="addr" >
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value ="취소" onclick="location.href='list.do'">
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
